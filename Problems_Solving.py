@@ -34,3 +34,34 @@ def twoSumHash(nums: List[int], target: int) -> List[int]:
 print(twoSumHash([2,7,8,10],10))
 
 
+
+#1. Two Sum ------------------------------
+# https://leetcode.com/problems/palindrome-number/description/
+
+# Solution 1: (Brute Force)
+
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+
+        if x < 0:
+            return False
+
+
+        reversed = 0 
+        temp = x
+
+        # 121
+
+        while temp != 0: 
+            digit = temp % 10   # 1
+            reversed = reversed * 10 + digit
+            temp //= 10
+
+        if x == reversed:
+            return True
+        
+        return False
+            
+
+
+
