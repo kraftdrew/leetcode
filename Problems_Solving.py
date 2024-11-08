@@ -1,4 +1,4 @@
-#1. Two Sum ------------------------------
+# 1. Two Sum ------------------------------
 # https://leetcode.com/problems/two-sum/
 
 # Solution 1: (Brute Force)
@@ -31,37 +31,55 @@ def twoSumHash(nums: List[int], target: int) -> List[int]:
 
             
         
-print(twoSumHash([2,7,8,10],10))
+# print(twoSumHash([2,7,8,10],10))
 
 
 
-#1. Two Sum ------------------------------
+# 9. Palindrome Number ------------------------------
 # https://leetcode.com/problems/palindrome-number/description/
 
-# Solution 1: (Brute Force)
 
-class Solution:
-    def isPalindrome(self, x: int) -> bool:
+# Solution 1: Reversing the Entire Number
 
-        if x < 0:
-            return False
+def isPalindrome(x: int) -> bool:
 
-
-        reversed = 0 
-        temp = x
-
-        # 121
-
-        while temp != 0: 
-            digit = temp % 10   # 1
-            reversed = reversed * 10 + digit
-            temp //= 10
-
-        if x == reversed:
-            return True
-        
+    if x < 0:
         return False
+    
+    reversed = 0 
+    temp = x
+    # 121
+    while temp != 0: 
+        digit = temp % 10   # 1
+        reversed = reversed * 10 + digit
+        temp //= 10
+    if x == reversed:
+        return True
+    
+    return False
             
+            
+# Approach 2: Reversing Half of the Number
+
+def isPalindrome( x: int) -> bool:
+    if x < 0 or (x != 0 and x % 10 == 0):
+        return False
+
+    reversed_half = 0 
+    temp = x 
+
+    # 1230321
+    while temp > reversed_half:
+        reversed_half = reversed_half * 10 + temp % 10  # 1, 12, 123, 1230; 
+        temp //= 10   # 123032, 12303, 1230, 123
+
+    if  temp == reversed_half or temp == reversed_half // 10: 
+        return True
+    
+    return False
+
+#print(isPalindrome(123))
 
 
 
+# ------------------------------
