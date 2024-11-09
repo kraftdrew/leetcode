@@ -1,3 +1,9 @@
+# Summary 
+# 1. Two Sum ---------------------------------- (nov 7th)
+# 9. Palindrome Number ------------------------ (nov 7th)
+# 13. Roman to Integer ------------------------ (nov 8th)
+
+
 # 1. Two Sum ------------------------------
 # https://leetcode.com/problems/two-sum/
 
@@ -82,4 +88,60 @@ def isPalindrome( x: int) -> bool:
 
 
 
-# ------------------------------
+# 13. Roman to Integer ------------------------------
+# https://leetcode.com/problems/roman-to-integer/description/
+
+# test_string =  "MCMXCIV" 
+
+# My Solution
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        #reversed_s = s[::-1] 
+        values = {
+
+                'I': 1,
+                'V': 5,
+                'X': 10,
+                'L': 50,
+                'C': 100,
+                'D': 500,
+                'M': 1000
+        }
+
+        res = 0
+
+        for i in range(len(s)): 
+            print(f"s[i] : {s[i]}")
+            if i < len(s) - 1 and values[ s[i]] < values[s[i+1]]: 
+                res -= values[ s[i]]
+            else: 
+                res += values[ s[i]]
+
+        return res
+    
+      
+
+
+# My Solution with ternary (or conditional) expression 
+
+def romanToInt(s: str) -> list:
+    #reversed_s = s[::-1] 
+    values = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+    }
+    res = 0
+    result_list = list(map(lambda i:  
+                            -values[ s[i]]
+                            if i < len(s) - 1 and values[ s[i]] < values[s[i+1]] else values[ s[i]]
+                             , range(len(s)) ))
+    
+    return [result_list, sum(result_list)]
+
+
+#print(romanToInt(test_string))
