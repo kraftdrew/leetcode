@@ -3,6 +3,7 @@
 # 9. Palindrome Number ------------------------ (nov 7th)
 # 13. Roman to Integer ------------------------ (nov 8th)
 # 14. Longest Common Prefix ------------------- (nov 9th)
+# 20. Valid Parentheses  ---------------------- (nov 11th)
 
 
 # 1. Two Sum ------------------------------
@@ -197,4 +198,29 @@ class Solution:
         return result_string
 
 
-        
+
+
+# 20. Valid Parentheses
+# https://leetcode.com/problems/valid-parentheses/description/
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+
+        check_list = { 
+            ")" : "(", 
+            "]" : "[",
+            "}" : "{"
+        }
+
+        open_brackets = [] 
+
+        for char in s:
+            if char in check_list.values():
+                open_brackets.append(char)
+            elif char in check_list:
+                if not open_brackets or check_list[char] != open_brackets[-1]:
+                    return False
+                open_brackets.pop()
+            
+        return not open_brackets
+
