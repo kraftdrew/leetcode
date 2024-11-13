@@ -1,27 +1,54 @@
-test_string =  "MCMXCIV" # IV
-            #   MCMXCIV
+from typing import Optional, List, Dict
 
 
-def romanToInt(s: str) -> list:
-    #reversed_s = s[::-1] 
-    values = {
-            'I': 1,
-            'V': 5,
-            'X': 10,
-            'L': 50,
-            'C': 100,
-            'D': 500,
-            'M': 1000
-    }
-    res = 0
-    result_list = list(map(lambda i:  
-                            -values[ s[i]]
-                            if i < len(s) - 1 and values[ s[i]] < values[s[i+1]] else values[ s[i]]
-                             , range(len(s)) ))
+class ListNode:
+    def __init__(self, value = 0, next: Optional['ListNode'] = None): 
+        self.value = value
+        self.next = next 
+
+
+
+class NodeGenerator: 
+
+    def __init__(self, n : int = 1): 
+        self.n = n
+        self.node_list = []
+        self.generate_node()
+
+    def generate_node(self):
+
+        for i in range(self.n): 
+
+            new_node = ListNode(i + 1) 
+
+            self.node_list.append(new_node)
+
+            if i > 0:
+                self.node_list[i-1].next = new_node
+
+        return
     
-    return [result_list, sum(result_list)]
+    def print_nodes(self): 
+        current = self.node_list[0] if self.node_list else None 
+
+        while current: 
+            print(current.value, end= " -> " if current.next else '\n' )
+            current = current.next
+
+      
 
 
-print(romanToInt(test_string))
-        
+            
 
+graph5 = NodeGenerator(5)   
+graph5.print_nodes()      
+
+
+
+
+
+
+# head = ListNode(1)
+
+# second_node = ListNode(2)
+# head.next = second_node
