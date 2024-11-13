@@ -4,6 +4,7 @@
 # 13. Roman to Integer ------------------------ (nov 8th)
 # 14. Longest Common Prefix ------------------- (nov 9th)
 # 20. Valid Parentheses  ---------------------- (nov 11th)
+# 21. Merge Two Sorted Lists ------------------ (nov 12th)
 
 
 # 1. Two Sum ------------------------------
@@ -96,31 +97,27 @@ def isPalindrome( x: int) -> bool:
 # test_string =  "MCMXCIV" 
 
 # My Solution
-class Solution:
-    def romanToInt(self, s: str) -> int:
-        #reversed_s = s[::-1] 
-        values = {
 
-                'I': 1,
-                'V': 5,
-                'X': 10,
-                'L': 50,
-                'C': 100,
-                'D': 500,
-                'M': 1000
-        }
+def romanToInt(self, s: str) -> int:
+    #reversed_s = s[::-1] 
+    values = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+    }
+    res = 0
+    for i in range(len(s)): 
+        print(f"s[i] : {s[i]}")
+        if i < len(s) - 1 and values[ s[i]] < values[s[i+1]]: 
+            res -= values[ s[i]]
+        else: 
+            res += values[ s[i]]
+    return res
 
-        res = 0
-
-        for i in range(len(s)): 
-            print(f"s[i] : {s[i]}")
-            if i < len(s) - 1 and values[ s[i]] < values[s[i+1]]: 
-                res -= values[ s[i]]
-            else: 
-                res += values[ s[i]]
-
-        return res
-    
       
 
 
@@ -223,4 +220,51 @@ class Solution:
                 open_brackets.pop()
             
         return not open_brackets
+
+
+
+
+
+# 21. Merge Two Sorted Lists
+
+
+from typing import Optional
+
+#Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+class Solution:
+
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+
+        dummy = ListNode(10)
+        current = dummy 
+
+        while list1 and list2:
+            if list1.val < list2.val: 
+                print("place1")
+                current.next = list1 
+                list1 = list1.next
+                print(f"current.next: {current.next}")
+                print(f"dummy: {dummy}")
+                print(f"list1: {list1}")
+            
+            else:
+                print("place2")
+                current.next = list2
+                list2 = list2.next
+                print(f"current.next: {current.next}")
+                print(f"dummy: {dummy}")
+                print(f"list2: {list2}")
+
+            current = current.next
+
+        current.next = list1 if list1 else list2
+
+        return dummy.next
+
 
