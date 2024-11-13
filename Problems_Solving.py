@@ -2,6 +2,8 @@
 # 1. Two Sum ---------------------------------- (nov 7th)
 # 9. Palindrome Number ------------------------ (nov 7th)
 # 13. Roman to Integer ------------------------ (nov 8th)
+# 14. Longest Common Prefix ------------------- (nov 9th)
+# 20. Valid Parentheses  ---------------------- (nov 11th)
 # 21. Merge Two Sorted Lists ------------------ (nov 12th)
 
 
@@ -142,6 +144,84 @@ def romanToInt(s: str) -> list:
 
 
 #print(romanToInt(test_string))
+
+
+# 14. Longest Common Prefix
+# https://leetcode.com/problems/longest-common-prefix/
+
+
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+
+        shortest_string = len( min(strs, key = len))
+        listLen = len(strs) 
+
+        result_string = ""
+
+        equals = False
+
+        for i in range(shortest_string):
+            for j in range(listLen-1):
+                if not strs[j][i] == strs[j+1][i]: 
+                    return result_string
+             
+            result_string += strs[0][i]
+
+        return result_string
+    
+
+# beats 100%
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]):
+
+
+        # Sorting guarantees that the first and last strings in the sorted list 
+        # will have the maximum possible difference in terms of common prefix.
+        strs = sorted(strs)
+        first_el = strs[0]
+        last_el = strs[-1]
+
+        shortest_string = len( min([first_el,last_el], key = len))
+        result_string = ""
+
+        for i in range(shortest_string):
+                if not first_el[i] == last_el[i]: 
+                    return result_string
+                else:
+                    result_string += first_el[i]
+
+    
+
+        return result_string
+
+
+
+
+# 20. Valid Parentheses
+# https://leetcode.com/problems/valid-parentheses/description/
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+
+        check_list = { 
+            ")" : "(", 
+            "]" : "[",
+            "}" : "{"
+        }
+
+        open_brackets = [] 
+
+        for char in s:
+            if char in check_list.values():
+                open_brackets.append(char)
+            elif char in check_list:
+                if not open_brackets or check_list[char] != open_brackets[-1]:
+                    return False
+                open_brackets.pop()
+            
+        return not open_brackets
+
+
 
 
 
